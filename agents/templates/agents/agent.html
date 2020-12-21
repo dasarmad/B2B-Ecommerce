@@ -1,0 +1,42 @@
+{% extends "agents/layout.html" %}
+
+{% block title %}
+  {% if user%}
+    {{user|capfirst}} | Agent
+  {% endif %}
+{% endblock %}
+
+
+
+{% block body %}
+
+{% include "agents/sidenav.html" %}
+    
+    <div class="parent-div-order-page">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-xs-10 col-sm-10 col-md-8 col-lg-6 offset-xs-1 offset-sm-1 offset-md-2 offset-lg-3">
+                    <div>
+                        <div class=" col-xs-12 col-sm-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1">
+                            <div class="btn-toolbar" role="toolbar">
+                                <div style="width: 50%;" class="btn-group" role="group">
+                                    <a href="#" id="submit-button" type="button" class="btn btn-success btn-lg">View all orders</a>
+                                    &nbsp;
+                                </div>
+                                
+                                <div style="width: 50%;" class="btn-group" role="group">
+                                    &nbsp;
+                                    <a href="{% url 'agents:customers' user.username %}" id="submit-button" type="button" class="btn btn-success btn-lg">Make a new order</a>
+                            
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+
+{% endblock %}

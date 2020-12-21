@@ -1,0 +1,1 @@
+web: gunicorn ELETTRA_LAMBORGHINI.wsgi --log-file -

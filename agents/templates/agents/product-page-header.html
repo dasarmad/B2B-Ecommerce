@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pt-3 pb-3">
+                    {% if selected_c %}
+                        <code>Note: You're making order for {{selected_c.name}}, {{selected_c.email}}</code>
+                        <br>
+                        <small>Do you want to select other customer? <a href="{% url 'agents:customers' user.username %}">Click Here</a></small>
+                    {% endif %}
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pt-3 pb-3">
+                    <form action="{% url 'agents:products' %}" method="get">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                {% csrf_token %}
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="btn-toolbar" role="toolbar">
+                                    <div style="width: 80%;" class="btn-group" role="group">
+                                        <input class="form-control" type="search" name="q" value="{{ request.GET.q }}" placeholder="SKU or name..." /> &nbsp;
+                                    </div>
+                                    
+                                    <div style="width: 20%;" class="btn-group" role="group">
+                                        &nbsp;
+                                        <input width="100%" class="btn btn-success btn-md" type="submit" value="Search"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                      </form> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

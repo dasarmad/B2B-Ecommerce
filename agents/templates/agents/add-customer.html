@@ -1,0 +1,110 @@
+{% extends "agents/layout.html" %}
+
+{% block title %}
+    {% if user%}
+        Add customer | {{user}}
+    {% endif %}
+    
+{% endblock %}
+
+
+
+{% block body %}
+
+
+{% include "agents/sidenav.html" %}
+    <div class="parent-div-addcustomer-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        <div class=" col-xs-12 col-sm-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1">
+                            <div>
+                                <h4 align="center">Add a new customer</h4>
+                            <form action="{% url 'agents:add_customer' user.username %}" method="post">
+                                
+                                <div class="form-group row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                      <div class="row no-gutters">
+                                        <div class="col-12">
+                                            <div class="col-sm-12">
+                                                {% csrf_token %}
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                                <label for="c_name" class="col-sm-12 col-form-label">Name: </label>
+                                                <div class="col-sm-12">
+                                                    <input id="c_name" type="name" class="form-control form-control-md" name="name" required="">
+                                                </div>
+                                        </div>
+                                        <div class="col-6">
+                                                <label for="c_email" class="col-sm-12 col-form-label">Email: </label>
+                                                <div class="col-sm-12">
+                                                    <input id="c_email" type="email" class="form-control form-control-md" name="email" required="">
+                                                </div>
+                                        </div>
+                                        <div class="col-6">
+                                                <label for="c_phone" class="col-sm-12 col-form-label">Phone: </label>
+                                                <div class="col-sm-12">
+                                                    <input id="c_phone" type="number" class="form-control form-control-md" name="phone" required="">
+                                                </div>
+                                        </div>
+                                        <div class="col-6">
+                                                <label for="c_region" class="col-sm-12 col-form-label">Region: </label>
+                                                <div class="col-sm-12">
+                                                    <input id="c_region" type="text" class="form-control form-control-md" name="region" required="">
+                                                </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="c_billing_address" class="col-sm-12 col-form-label">Billing address: </label>
+                                            <div class="col-sm-12">
+                                                <input id="c_billing_address" type="text" class="form-control form-control-md" name="billing_address" required="">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="c_delivery_address" class="col-sm-12 col-form-label">Delivery address: </label>
+                                            <div class="col-sm-12">
+                                                <input id="c_delivery_address" type="text" class="form-control form-control-md" name="delivery_address" required="">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="c_vat_number" class="col-sm-12 col-form-label">VAT number: </label>
+                                            <div class="col-sm-12">
+                                                <input id="c_vat_number" type="text" class="form-control form-control-md" name="vat_number" required="">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="col-sm-12 pt-3" id="div-error">
+                                                {% if message %}
+                                                    <small style="color: red;" id="error-message">{{message}}</small>
+                                                {% endif %}    
+                                            </div>
+                                            <div class="col-sm-12 pt-4" id="div-submit-button">
+                                                <div style="width: 100%;">
+                                                    <button style="width: 100%;" id="submit-button" type="submit" class="btn btn-success btn-md">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                      </div>
+                                    </div>
+                                </div>
+                                
+                                
+        
+                            </form>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+
+{% endblock %}
+
+       
+       
