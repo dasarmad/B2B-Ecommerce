@@ -39,6 +39,7 @@ ALLOWED_HOSTS = ['williamselmo-sarmad.herokuapp.com', '127.0.0.1']
 INSTALLED_APPS = [
     'agents',
     'product',
+    'order',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,7 +49,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'mptt',
-    'google_translate'
+    'google_translate',
+    'import_export'
 ]
 
 MIDDLEWARE = [
@@ -120,7 +122,7 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'it'
 
 TIME_ZONE = 'UTC'
 

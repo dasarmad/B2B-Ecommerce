@@ -1,0 +1,52 @@
+<input type="hidden" name="color" id="color" value="{{ color_id }}">
+<div class="size-option">
+    <!--<span class="text-uppercase">Size:</span>
+    <select name="size" id="size">
+        {% for rs in sizes %}
+        <option type="radio" name="variantid" id="variantid" value="{{ rs.id }}" onchange="this.form.submit();">{{ rs.size }}</option>
+    {% endfor %}
+    </select>
+    -->
+    <div>
+        <div>
+            <input type="hidden" id="product_id" name="product_id" value="{{productid}}">
+            <lable for="size" class="col-form-label-sm">Sizes:</lable>
+            <div class="row">
+                {% for rs in sizes %}
+                <div class="col-sm-12 col-md-4 col-lg-2">
+                    <input type="hidden" type="number" id="variantid-{{ rs.size }}" name="variantid-{{ rs.size }}" value="{{ rs.id }}"/>
+                    <lable for="q-{{rs.size}}" class="col-form-label-sm"><span class="dot" style="width: 10px; height: 10px; background-color: {{rs.color.name}}; border:1px solid grey;"></span>{{ rs.size }}</lable>
+                    <input class="form-control form-control-sm add" style="width: inherit;" type="number" id="q-{{rs.size}}" name="q-{{rs.size}}" min="1" value=""/>
+                </div>
+                
+                {% endfor %}
+                
+            </div>
+            
+            <!--
+            <select name="size" id="size" class="form-control form-control-sm">
+                    {% for rs in sizes %}
+                        <option {% if variant.id == rs.id %} selected {% endif %} name="variantid" value="{{ rs.id }}">{{ rs.size }}</option>
+                    {% endfor %}
+            </select>
+            -->
+        </div>
+        <div style="width: 20%;" class="mt-3">
+            <lable for="quantity" class="col-form-label-lg">Quantity:</lable>
+            <input style="text-align: center;" id="quantity" type="name" name="quantity" required="" min="1" class="form-control form-control-lg" readonly>
+        </div>
+        <script>
+            function sumOfIncome() {
+            var sum = 0;
+            $('.add').each(function() {
+                sum += parseInt(this.value) || 0;
+                console.log(sum)
+            });
+            $('#quantity').val(sum);
+            }
+            $('.add').blur(function() {
+            sumOfIncome();
+            })
+        </script>
+    </div>
+</div>

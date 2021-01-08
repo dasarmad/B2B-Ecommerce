@@ -1,0 +1,78 @@
+{% extends "agents/layout.html" %}
+{% load static %}
+{% block title %}
+  {% if user%}
+  Tutti gli ordini | {{user|capfirst}} 
+  {% endif %}
+{% endblock %}
+
+
+
+{% block body %}
+{% include "agents/sidenav.html" %}
+<div class="parent-div-products-page ">
+    <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-6 mt-1 mb-3">
+                <div style="float: left;" class="btn-group" role="group">
+                    <small>Ordine</small>
+                </div>
+            </div>
+            <div class="col-6 mt-1 mb-3">
+                <div style="float: right;" class="btn-group" role="group">
+                    <small>Fai un nuovo ordine? &nbsp;<a href="{% url 'agents:customers' user.username %}"> Clicca qui</a></small>
+                </div>
+            </div>
+            {% if orders %}
+                <div class="col-12">
+                    <div  class="table-responsive">
+                        <table  id="customers_table" class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th align="center">Sr #</th>  
+                                <th align="center">Codice Ordine</th>
+                                <th align="center">Stato</th>
+                                <th  align="center">Totale Ordine</th>
+                                <th  >Nome Cliente</th>
+                                <th  >Email</th>
+                                <th  >Numero di Telefono</th>
+                                <th  >Indirizzo di Consegna</th>
+                                <th  >P.Iva</th>
+                                <th  align="center">Azione</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in orders %}
+                            <tr class="col-form-label col-form-label-sm">
+                                    <td  align="center">{{ forloop.counter }}</td>
+                                    <td  align="center">
+                                        <a href="{% url 'order:order_detailed' order.id %}" style="border-radius: 25px;" class="btn btn-sm btn-outline-success w-100">
+                                            {{order.code}}
+                                        </a>
+                                    </td>
+                                    <td align="center">{{order.status}}</td>
+                                    <td align="right">{{order.total}}</td>
+                                    <td >{{order.customer.name|capfirst}}</td>
+                                    <td >{{order.customer.email}}</td>
+                                    <td >{{order.customer.phone}}</td>
+                                    <td >{{order.customer.delivery_address}}</td>
+                                    <td align="center">{{order.customer.vat_number}}</td>
+                                    <td align="center">
+                                        <a href="{% url 'order:order_detailed' order.id %}" class="btn btn-info btn-sm">Visualizza Dettagli</a>
+                                    </td>
+                            </tr>
+                            {% endfor %} 
+                            </tbody>
+                        </table>
+                    </div>   
+                </div>
+            {% else %}
+                <div align="center" class="col-12 mt-5">
+                    <img class="w-25" src="{% static 'agents/images/not_found.svg' %}"/>
+                    <h5 class="col-form-label col-form-label-md pt-3">Non trovato!</h5>
+                  </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

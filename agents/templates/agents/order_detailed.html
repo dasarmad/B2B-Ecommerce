@@ -1,0 +1,66 @@
+{% extends "agents/layout.html" %}
+{% load static %}
+{% block title %}
+  {% if user%}
+  {{orders.code}} | {{user|capfirst}} 
+  {% endif %}
+{% endblock %}
+
+
+
+{% block body %}
+{% include "agents/sidenav.html" %}
+<div class="parent-div-products-page ">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-12 mt-3 mb-3">
+                <div style="float: left;" class="btn-group" role="group">
+                    <h3>Il tuo ordine <code>{{orders.code}}</code> è stato 
+                        {% if orders.status == 'New' %}
+                            confermato.
+                        {% else %}
+                            {{orders.status}}.
+                        {% endif %}
+                        </h3>
+                </div>
+            </div>
+            {% if orders %}
+                <div class="col-12">
+                    <div  class="table-responsive">
+                        <table  id="customers_table" class="table table-hover">
+                            <thead class="col-form-label col-form-label-sm" >
+                            <tr align="center">
+                                <th >Sr #</th>  
+                                <th align="left">Prodotto</th>
+                                <th >Variante</th>
+                                <th >Prezzo per pezzo</th>
+                                <th >Quantità</th>
+                                <th >Totale (Incluso 22% Iva)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in list_of_ordered_product %}
+                            <tr align="center" class="col-form-label col-form-label-sm" >
+                                    <td >{{ forloop.counter }}</td>
+                                    <td align="left">{{order.product.title|capfirst}}</td>
+                                    <td ><small>Colori:</small> {{order.variant.color}}, <small>Taglie:</small> {{order.variant.size}}</td>
+                                    <td >{{order.price}}</td>
+                                    <td >{{order.quantity}}</td>
+                                    <td >{{order.total_amount}}</td>
+                            </tr>
+                            {% endfor %} 
+                            </tbody>
+                        </table>
+                    </div>   
+                </div>
+            {% else %}
+                <div align="center" class="col-12 mt-5">
+                    <img class="w-25" src="{% static 'agents/images/not_found.svg' %}"/>
+                    <h5 class="col-form-label col-form-label-md pt-3">Non trovato!</h5>
+                </div>
+            {% endif %}
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

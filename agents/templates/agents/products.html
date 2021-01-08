@@ -1,8 +1,8 @@
 {% extends "agents/layout.html" %}
-
+{% load static %}
 {% block title %}
   {% if user%}
-    {{user|capfirst}} | Agent
+    Prodotti | {{user|capfirst}}
   {% endif %}
 {% endblock %}
 
@@ -15,39 +15,41 @@
     {% include "agents/product-page-header.html" %}
         <div class="container">
             <div class="row">
-                {% if latest_products %}
                     <div class="col-12">
                         <div class="row">
+                            
                             {% for latest_product in latest_products %}
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mb-2 mt-2">
-                                <div class="card">
-                                    <div class="img-fluid product-picture" style="background-image: url({{MEDIA_URL}}{{latest_product.image.url}}); height: 250px; border-radius: 3px 3px 0px 0px;">
-    
-                                    </div>
-                                    <div class="pb-2 pt-2" style="display: inline-block; left: 0; right: 0; position: absolute;">
-                                        <div class="pb-1 pt-1 pl-1 pr-1 mb-2 product-retail-price">
-                                            <small>Retail: {{latest_product.retail_price}}</small>
+                                {% if latest_product.status == 'True' %}
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mb-2 mt-2">
+                                    <div class="card">
+                                        <div class="img-fluid product-picture" style="background-image: url({{MEDIA_URL}}{{latest_product.image.url}}); height: 250px; border-radius: 3px 3px 0px 0px;">
+        
                                         </div>
-                                        <div class="pb-1 pt-1 pl-1 pr-1 product-wholesale-price">
-                                            <small>Wholesale: {{latest_product.wholesale_price}}</small> 
+                                        <div class="pb-2 pt-2" style="display: inline-block; left: 0; right: 0; position: absolute;">
+                                            <div class="pb-1 pt-1 pl-1 pr-1 mb-2 product-retail-price">
+                                                <small>Prezzo Sell-In: {{latest_product.retail_price}}</small>
+                                            </div>
+                                            <div class="pb-1 pt-1 pl-1 pr-1 product-wholesale-price">
+                                                <small>Prezzo Sell-Out: {{latest_product.wholesale_price}}</small> 
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="card-body">
-                                      <div class="card-title">{{latest_product.title}}</div>
-                                      <p class="card-text"><small><b>SKU: </b>{{latest_product.id}}</small></p>
-                                      <a href="{% url 'agents:detailed_product' latest_product.id %}" class="btn btn-success btn-sm stretched-link">View details <i class="fas fa-arrow-circle-right"></i></a>
+                                        <div class="card-body">
+                                        <div class="card-title">{{latest_product.title}}</div>
+                                        <p class="card-text"><small><b>SKU: </b>{{latest_product.id}}</small></p>
+                                        <a href="{% url 'agents:detailed_product' latest_product.id latest_product.slug %}" class="btn btn-success btn-sm stretched-link" style="width: 100%;">Seleziona Variante <i class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
                                     </div>
                                 </div>
+                                {% endif%}
+                            {% empty %}
+                            <div align="center" class="col-12 pt-5">
+                                <img class="w-25" src="{% static 'agents/images/not_found.svg' %}"/>
+                                <h4 class="col-form-label col-form-label-md pt-3">Nessuna corrispondenza trovata!</h4>
                             </div>
                             {% endfor %}
                         </div>
                     </div>
-                {% else %}
-                    <div align="center" class="col-12 pt-5">
-                        <img src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/search_perseus/apps/empty-search-results.2ee1dc9.png" style="width: 50%;"/>
-                        <h5>No match found!</h5>
-                    </div>
-                 {% endif %}   
+                
             </div>
         </div>
     </div>

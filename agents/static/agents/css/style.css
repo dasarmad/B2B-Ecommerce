@@ -1,6 +1,23 @@
+.btn-success,
+.btn-success:active,
+.btn-success:visited {
+  background-color: #6C63FF !important;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #3f35fa !important;
+  transition: all 1s ease;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+}
+
 body {
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
   -webkit-font-smoothing: antialiased;
+  zoom: 80%;
 }
 
 .parent-div {
@@ -20,7 +37,7 @@ body {
     align-items: center;
     text-align: center;
     min-height: 90vh;
-    background-color: whitesmoke;
+    background: linear-gradient(0deg, aliceblue, transparent);
 }
 
 .parent-div-products-page{
@@ -34,7 +51,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 90vh;
-    background-color: whitesmoke;
+    background: linear-gradient(0deg, aliceblue, transparent);
 }
 
 .form-to-play {
@@ -88,7 +105,14 @@ body {
   margin-right: 5px;
   height: 25px;
   width: 25px;
-  background-color: #673AB7;
+  background-color: #6C63FF;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.color-circle{
+  height: 25px;
+  width: 25px;
   border-radius: 50%;
   display: inline-block;
 }
@@ -235,16 +259,27 @@ card a:before{
   color: #43484D;
 }
 .product-description p {
-  color: #86939E;
+  color: #3a3a3a;
 }
 
 /* Product Color */
 .product-color {
   margin-bottom: 30px;
 }
- 
-.color-choose div {
-  display: inline-block;
+
+/*Quantity grids */
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
 }
 
 

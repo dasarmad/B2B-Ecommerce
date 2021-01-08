@@ -1,22 +1,25 @@
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fas fa-times-circle"></i></a>
-    <a href="{% url 'agents:customers' user.username %}"><i class="fas fa-user-tag"></i> Customers</a>
-    <a href="{% url 'agents:agent' user.username %}"><i class="fas fa-sort-amount-down-alt"></i> Orders</a>
+    <a href="{% url 'agents:customers' user.username %}"><i class="fas fa-user-tag"></i> Cliente</a>
+    <a href="{% url 'agents:agent' user.username %}"><i class="fas fa-sort-amount-down-alt"></i> Ordini</a>
+    <a href="{% url 'order:shopcart' %}"><i class="fas fa-shopping-cart"></i> Carrello</a>
+    <!--{% if shopcart %}
+    {% endif %}
     <a href="#"><i class="far fa-chart-bar"></i> Analytics</a>
-    <a href="#"><i class="fas fa-cog"></i> Settings</a>
-    <a href="{% url 'agents:index' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    <a href="#"><i class="fas fa-cog"></i> Settings</a>-->
+    <a href="{% url 'agents:index' %}"><i class="fas fa-sign-out-alt"></i> Disconnettersi</a>
 </div>
 
   <div class="container-fluid">
     <div class="row pt-4 pb-4 pl-4 pr-4">
       <div class="col-6">
-        <h5 style="cursor:pointer" onclick="openNav()"><i class="fas fa-bars"></i> Menu</h5>
+        <h5 style="cursor:pointer" onclick="openNav()"><i class="fas fa-bars"></i> Menù</h5>
       </div>
       <div class="col-6">
         {% if user%}
             <div style="float: right;">
               <span class="dot"></span>
-              <h5 class="agent-username" style="float: right;"> {{user.username}}</h5>
+              <h5 class="agent-username" style="float: right;"> {{user.username}}</h5> 
             </div>
             
         {% endif %}

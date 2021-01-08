@@ -1,8 +1,8 @@
 {% extends "agents/layout.html" %}
-
+{% load static %}
 {% block title %}
   {% if user%}
-    {{user.username|capfirst}} | Agent
+    Cliente | {{user.username|capfirst}}
   {% endif %}
 {% endblock %}
 
@@ -11,50 +11,59 @@
 {% block body %}
 
 {% include "agents/sidenav.html" %}
-    <div class="parent-div-order-page ">
-        <div class="container">
+    <div class="parent-div-products-page ">
+        <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-xs-10 col-sm-10 col-md-8 col-lg-6 offset-xs-1 offset-sm-1 offset-md-2 offset-lg-3">
-                    <div class="form-to-play">
-                                    {% if customers %}
-                                    <form action="{% url 'agents:customers' user.username %}" method="post">
-                                        <div class="form-group row">
-                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                              <div class="row no-gutters">
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                    {% csrf_token %}
-                                                </div>
-                                                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                                                        <label for="customer" class=" col-form-label">Choose a customer: </label>
-                                                        <select name="customer" id="customer">
-                                                                {% for customer in customers %}
-                                                                    <option value="{{customer.id}}">{{customer.name}}</option>
-                                                                {% endfor %}    
-                                                        </select>
-                                                </div>
-                                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                                    <input class="btn btn-success btn-sm" type="submit" value="Continue">
-                                                </div>
-                                                
-                                                
-                                              </div>
-                                            </div>
-                                        </div>
-                                        
-                                        
-                                      </form>
-                                      {% endif %}
-                    </div>  
-                            
-                    <div class="pt-5">
-                                <div style="width: 50%;" class="btn-group" role="group">
-                                    &nbsp;
-                                    <a href="{% url 'agents:add_customer' user.username %}" id="submit-button" type="button" class="btn btn-success btn-lg">Add new customer</a>
-                            
-                                </div>
+                <div class="col-12 mt-1 mb-3">
+                    <div style="float: right;" class="btn-group" role="group">
+                        <small>Crea Nuovo Cliente? &nbsp;<a href="{% url 'agents:add_customer' user.username %}">Clicca qui</a></small>
                     </div>
-                          
                 </div>
+                {% if customers %}
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table id="customers_table" class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th align="center">Sr #</th>  
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Numero di Telefono</th>
+                                    <th>Regione</th>
+                                    <th>Indirizzo di Fatturazione</th>
+                                    <th>Indirizzo di Consegna</th>
+                                    <th>P.Iva</th>
+                                    <th>Azione</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {% for customer in customers %}
+                                <tr class="col-form-label col-form-label-sm">
+                                        <td align="center">{{ forloop.counter }}</td>
+                                        <td>{{customer.name|capfirst}}</td>
+                                        <td>{{customer.email}}</td>
+                                        <td>{{customer.phone}}</td>
+                                        <td>{{customer.region|capfirst}}</td>
+                                        <td>{{customer.billing_address}}</td>
+                                        <td>{{customer.delivery_address}}</td>
+                                        <td>{{customer.vat_number}}</td>
+                                        <td>
+                                            <a href="{% url 'agents:redirectToProducts' customer.id %}" class="btn btn-success btn-sm">Continua <i class="fas fa-arrow-circle-right"></i></a>
+                                        </td>
+                                    
+                                    
+                                </tr>
+                                {% endfor %} 
+                                </tbody>
+                            </table>
+                        </div>   
+                    </div>
+                {% else %}
+                    <div align="center" class="col-12 mt-5">
+                        <img class="w-25" src="{% static 'agents/images/not_found.svg' %}"/>
+                        <h5 class="col-form-label col-form-label-md pt-3">Nessun cliente esiste.</h5>
+                      </div>
+                {% endif %}
             </div>
         </div>
     </div>

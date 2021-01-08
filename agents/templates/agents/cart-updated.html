@@ -1,0 +1,27 @@
+<div id="product-added">
+    <div class="container mt-2 mb-2">
+        <div align="center" class="row">
+            <div style="padding: 12px;box-shadow: 0px 2px 5px grey;background: #8bc34a69;border-radius: 3px;" class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+                <h5 style="border-bottom: 1px solid #ccc;" class="col-form-label col-form-label-lg"> Prodotti aggiunti </h5>
+                <div class="row mt-2">
+                    <div class="col-3" >
+                        <img class="h-100" src="{{MEDIA_URL}}{{added_product.image.url}}"/>
+                    </div>
+                    <div class="col-6">
+                        <div align="left">
+                            <p class="col-form-label col-form-label-lg">{{ added_product.title }}</p>
+                        </div>
+                    </div>
+                    <div class="col-3" >
+                        <a href="{% url 'order:shopcart' %}" class="btn btn-outline-success"><i class="fas fa-shopping-cart"></i> Vedi Carrello</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function() {
+        setTimeout(function(){ $("#product-added").hide(1000); }, 3000);
+  });              
+</script>

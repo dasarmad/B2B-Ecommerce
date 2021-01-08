@@ -17,7 +17,7 @@ class Customer(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="agent", blank=True)
 
     def __str__(self):
-        return f"{self.id} | {self.name} | {self.email} | {self.phone} | {self.region} | {self.billing_address} | {self.delivery_address} | {self.vat_number} | {self.pub_date} | {self.created_by}"
+        return f"{self.name} | {self.email} | {self.phone} | {self.region} | {self.billing_address} | {self.delivery_address} | {self.vat_number}"
 
 
 

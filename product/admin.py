@@ -7,6 +7,7 @@ from mptt.admin import DraggableMPTTAdmin
 from product import models
 from product.models import Category, Product, Images, Comment, Color, Size, Variants
 
+from import_export.formats import base_formats
 
 
 
@@ -68,11 +69,26 @@ class ImagesAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['id','title','category', 'status','image_tag']
     list_editable = ('status',)
-    list_filter = ['category']
+    list_filter = ('category', 'status')
     readonly_fields = ('image_tag',)
     inlines = [ProductImageInline,ProductVariantsInline]
     prepopulated_fields = {'slug': ('title',)}
 
+    def get_export_formats(self):
+            """
+            Returns available export formats.
+            """
+            formats = (
+                  base_formats.CSV,
+                  base_formats.XLS,
+                  base_formats.XLSX,
+                  base_formats.TSV,
+                  base_formats.ODS,
+                  base_formats.JSON,
+                  base_formats.YAML,
+                  base_formats.HTML,
+            )
+            return [f for f in formats if f().can_export()]
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['subject','comment', 'status','create_at']
@@ -80,14 +96,14 @@ class CommentAdmin(admin.ModelAdmin):
     readonly_fields = ('subject','comment','ip','user','product','rate','id')
 
 class ColorAdmin(admin.ModelAdmin):
-    list_display = ['name','code','color_tag']
+    list_display = ['id','name','code','color_tag']
 
 class SizeAdmin(admin.ModelAdmin):
     list_display = ['name','code']
 
 
 class VariantsAdmin(admin.ModelAdmin):
-    list_display = ['title','product','color','size','price','quantity','image_tag']
+    list_display = ['id','title','product','color','size','price','quantity','image_tag']
 
 
 admin.site.register(Category,CategoryAdmin2)

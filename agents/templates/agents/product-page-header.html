@@ -1,15 +1,22 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
+            
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pt-3 pb-3">
+                <!--
+                <div class="col-12 mb-2">
+                    <div style="text-align: center;">
+                        <a href="{% url 'order:shopcart' %}" style="width: 30%;" class="btn btn-success btn-md">View Order <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>-->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pb-1">
                     {% if selected_c %}
-                        <code>Note: You're making order for {{selected_c.name}}, {{selected_c.email}}</code>
+                        <code>Stai creando un'ordine per {{selected_c.name}}, {{selected_c.email}}</code>
                         <br>
-                        <small>Do you want to select other customer? <a href="{% url 'agents:customers' user.username %}">Click Here</a></small>
+                        <small>Vuoi selezionare un'altro cliente? <a href="{% url 'agents:customers' user.username %}">Clicca qui</a></small>
                     {% endif %}
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pt-3 pb-3">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pb-1">
                     <form action="{% url 'agents:products' %}" method="get">
                         <div class="form-group row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -18,12 +25,11 @@
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <div class="btn-toolbar" role="toolbar">
                                     <div style="width: 80%;" class="btn-group" role="group">
-                                        <input class="form-control" type="search" name="q" value="{{ request.GET.q }}" placeholder="SKU or name..." /> &nbsp;
-                                    </div>
-                                    
+                                        <input class="form-control" type="search" name="q" value="{{ request.GET.q }}" placeholder="SKU o Nome..." /> &nbsp;
+                                    </div>   
                                     <div style="width: 20%;" class="btn-group" role="group">
                                         &nbsp;
-                                        <input width="100%" class="btn btn-success btn-md" type="submit" value="Search"/>
+                                        <input width="100%" class="btn btn-success btn-md" type="submit" value="Cerca"/>
                                     </div>
                                 </div>
                             </div>
