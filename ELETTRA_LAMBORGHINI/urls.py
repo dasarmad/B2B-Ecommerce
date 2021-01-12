@@ -22,7 +22,9 @@ from django.urls import path, include, re_path
 from django.conf.urls.static import static
 
 urlpatterns = [
-    
+    path('', include("agents.urls", namespace="agents")),
+    path('products/', include("product.urls")),
+    path('order/', include("order.urls")),
     
     #re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
@@ -31,8 +33,5 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('', include("agents.urls", namespace="agents")),
-    path('products/', include("product.urls")),
-    path('order/', include("order.urls")),
-    prefix_default_language=False,
+   prefix_default_language=False,
 )+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

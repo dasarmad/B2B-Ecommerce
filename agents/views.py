@@ -5,13 +5,14 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.db.models.query import QuerySet
 
 from django.template.loader import render_to_string
 
 from django.utils.timezone import localtime, now
 
 from .models import Customer
-from product.models import Category, Product, Images, Comment, Variants
+from product.models import Category, Product, Images, Comment, Variants, Color
 from order.models import ShopCart
 
 #from django.contrib.auth.models import User
@@ -151,6 +152,15 @@ def detailed_product(request, id, slug):
         else:
             variants = Variants.objects.filter(product_id=id)
             colors = Variants.objects.raw('SELECT * FROM  product_variants  WHERE product_id=%s GROUP BY color_id',[id])
+            #colors = Variants.objects.filter(product_id=id).distinct('color_id')
+            print(colors)
+
+            colors.group_by = ['color_id'] 
+            
+            results = QuerySet(query=colors, model=Variants)
+            #print(results)
+            #raw('SELECT * FROM  product_variants  WHERE product_id=%s GROUP BY color_id',[id])
+            #colors = Variants.objects.raw('SELECT * FROM  product_variants  WHERE product_id=%s GROUP BY color_id',[id])
             #colors = Variants.objects.filter(product_id=id,size_id=variants[0].size_id )
             #sizes = Variants.objects.raw('SELECT * FROM  product_variants  WHERE product_id=%s GROUP BY size_id',[id])
             sizes = Variants.objects.filter(product_id=id,color_id=variants[0].color_id )

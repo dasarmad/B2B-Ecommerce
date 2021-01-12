@@ -33,7 +33,7 @@ class OrderAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 class OrderProductAdmin(admin.ModelAdmin):
     list_display = ['order', 'user', 'customer', 'product','price','quantity','total_amount']
-    list_filter = ['user']
+    list_filter = ['user', 'order']
 
 admin.site.register(ShopCart,ShopCartAdmin)
 admin.site.register(Order,OrderAdmin)

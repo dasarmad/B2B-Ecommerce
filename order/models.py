@@ -50,8 +50,8 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, default=0)
     total = models.FloatField()
     status=models.CharField(max_length=10,choices=STATUS,default='New')
-    ip = models.CharField(blank=True, max_length=20)
-    note = models.CharField(blank=True, max_length=100)
+    ip = models.CharField(blank=True, max_length=255)
+    note = models.CharField(blank=True, max_length=255)
     create_at=models.DateTimeField(auto_now_add=True)
     update_at=models.DateTimeField(auto_now=True)
 
