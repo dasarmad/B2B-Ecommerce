@@ -151,8 +151,8 @@ def detailed_product(request, id, slug):
             query += variant.title+' Size:' +str(variant.size) +' Color:' +str(variant.color)
         else:
             variants = Variants.objects.filter(product_id=id)
-            colors = Variants.objects.raw('SELECT * FROM  product_variants  WHERE product_id=%s GROUP BY color_id',[id])
-            #colors = Variants.objects.filter(product_id=id).distinct('color_id')
+            #colors = Variants.objects.raw('SELECT * FROM  product_variants  WHERE product_id=%s GROUP BY color_id',[id])
+            colors = Variants.objects.filter(product_id=id).distinct('color_id')
             print(colors)
 
             colors.group_by = ['color_id'] 

@@ -68,9 +68,9 @@ class OrderProduct(models.Model):
     )
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, default=0, max_length=1000)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    variant = models.ForeignKey(Variants, on_delete=models.SET_NULL,blank=True, null=True) # relation with varinat
+    variant = models.ForeignKey(Variants, on_delete=models.SET_NULL,blank=True, null=True) # relation with variant
     quantity = models.IntegerField()
     price = models.FloatField()
     total_amount = models.FloatField()
