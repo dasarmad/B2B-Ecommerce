@@ -206,6 +206,7 @@ def orderPlace(request):
         data.note = specialInstructions
         data.save()
 
+        print(data)
         for st in shopcart:
             detail = OrderProduct()
             detail.order_id = data.id

@@ -46,7 +46,7 @@ class Order(models.Model):
     )
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     
-    code = models.CharField(max_length=5, editable=False )
+    code = models.CharField(max_length=10, editable=False )
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, default=0)
     total = models.FloatField()
     status=models.CharField(max_length=10,choices=STATUS,default='New')
